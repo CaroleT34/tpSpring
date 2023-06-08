@@ -59,7 +59,6 @@ public class AnimalController {
 	public String getCreateAnimal(Model model) {
 
 		model.addAttribute("animal", new Animal());
-		model.addAttribute("speciesList", speciesRepository.findAll());
 		return "animal/create_animal";
 	}
 
