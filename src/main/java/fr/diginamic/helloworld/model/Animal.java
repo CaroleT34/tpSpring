@@ -37,18 +37,34 @@ public class Animal {
     @Column(length = 255, nullable = false)
     private String sex;
 
-    @Column(name = "species_id")
+    @JoinColumn(name = "species_id")
     @ManyToOne
-	private Species species;
+    private Species species;
     
     @ManyToMany
     @JoinTable(name = "person_animals",
     		joinColumns = @JoinColumn(name = "animals_id"),
     		inverseJoinColumns = @JoinColumn(name = "person_id")
             )
-    private List<Animal> animals;
+    private List<Person> person;
 
-    /**Constructeur
+    /**Getter persons
+	 * 
+	 * @return List<Person> persons
+	 */
+	public List<Person> getPerson() {
+		return person;
+	}
+
+	/** Setter persons
+	 * 
+	 * @param persons the persons to set (type List<Person>)
+	 */
+	public void setPersons(List<Person> person) {
+		this.person = person;
+	}
+
+	/**Constructeur
 	 *
 	 */
 	public Animal() {
@@ -136,14 +152,6 @@ public class Animal {
 		return species;
 	}
 
-	/**Getter animals
-	 * 
-	 * @return List<Animal> animals
-	 */
-	public List<Animal> getAnimals() {
-		return animals;
-	}
-
 	/** Setter species
 	 * 
 	 * @param species the species to set (type Species)
@@ -152,17 +160,11 @@ public class Animal {
 		this.species = species;
 	}
 
-	/** Setter animals
-	 * 
-	 * @param animals the animals to set (type List<Animal>)
-	 */
-	public void setAnimals(List<Animal> animals) {
-		this.animals = animals;
-	}
-
 	@Override
 	public String toString() {
-		return "Animal [id=" + id + ", color=" + color + ", name=" + name + ", sex=" + sex + ", speciesId=" + species
-				+ "]";
+		return "Animal [id=" + id + ", color=" + color + ", name=" + name + ", sex=" + sex + ", species=" + species
+				+ ", person=" + person + "]";
 	}
+	
+
 }

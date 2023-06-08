@@ -1,0 +1,60 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+	<meta charset="UTF-8">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<title>Liste des animaux</title>
+</head>
+
+<body>
+	<h1 class="title">Liste des animaux</h1>
+
+	<div class="table-responsive">
+		<table class="table align-middle">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Espèce</th>
+					<th>Couleur</th>
+					<th>Sexe</th>
+					<th>Mettre à jour</th>
+					<th>Supprimer</th>
+				</tr>
+			</thead>
+			<tbody class="table-group-divider">
+				<tr th:each="animalList : ${animalList}">
+					<td th:text="${animalList.name}"></td>
+					<td th:text="${animalList.species.commonName}"></td>
+					<td th:text="${animalList.color}"></td>
+					<td th:text="${animalList.sex}"></td>
+					<td><a th:href="@{'/animal/' + ${animalList.id}}"><i class="bi bi-pencil"></i></a></td>
+					<td><a th:href="@{'/animal/delete/' + ${animalList.id}}" onclick="confirm('Êtes-vous sûr ?')"><i class="bi bi-trash"></i></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="d-flex gap-2 justify-content-center py-5">
+		<button class="btn btn-success d-inline-flex align-items-center" type="button"
+			onclick="window.location='/animal/create'">
+			Ajouter un animal
+			<i class="bi ms-1 bi-arrow-right"></i>
+		</button>
+		<button class="btn btn-secondary d-inline-flex align-items-center" type="button"
+			onclick="window.location='/person'">
+			Liste des personnes
+			<i class="bi ms-1 bi-arrow-right"></i>
+		</button>
+		<button class="btn btn-secondary d-inline-flex align-items-center" type="button"
+			onclick="window.location='/species'">
+			Liste des espèces
+			<i class="bi ms-1 bi-arrow-right"></i>
+		</button>
+	</div>
+
+</body>
+
+</html>

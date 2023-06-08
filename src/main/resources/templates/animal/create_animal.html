@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+	<meta charset="UTF-8">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<title>Création d'un animal</title>
+</head>
+
+<body>
+	<h1 class="title">Création d'un animal</h1>
+
+	<div class="container col-lg-6 col-xxl-6 my-5 mx-auto">
+		<form th:object="${animal}" th:action="@{/animal}" method="post">
+			<input type="hidden" th:field="*{id}" />
+			<div class="form-group my-3">
+				<label class="form-label" for="name">Nom : </label>
+				<input class="form-control" type="text" th:field="*{name}" id="name" />
+				<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</span>
+			</div>
+			<div class="form-group my-3">
+				<label class="form-label" for="color">Couleur :</label>
+				<input class="form-control" type="text" th:field="*{color}" id="color" />
+				<span th:if="${#fields.hasErrors('color')}" th:errors="*{color}">Error</span>
+			</div>
+			<div class="form-group my-3">
+				<label class="form-label" for="sex">Sexe :</label>
+				<select class="form-select" th:field="*{sex}" id="sex">
+					<option th:each="sex : ${T(com.example.demo.enums.Sex).values()}" th:value="${sex}"
+						th:text="${sex}">
+					</option>
+				</select>
+			</div>
+			<div class="form-group my-3">
+				<label class="form-label" for="specie">Espèce :</label>
+				<select class="form-select" th:field="*{species}" id="specie">
+					<option th:each="specie :${speciesList}" th:value="${specie.id}"
+						th:text="${specie.commonName + '(' + specie.latinName + ')'}">
+					</option>
+				</select>
+			</div>
+			<div class="form-group my-3">
+				<button class="btn btn-success d-inline-flex align-items-center" type="submit">
+					Créer
+				</button>
+				<button class="btn btn-secondary d-inline-flex align-items-center" type="button"
+					onclick="window.location='/animal'">
+					Retour
+				</button>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
